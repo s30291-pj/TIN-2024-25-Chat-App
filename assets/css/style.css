@@ -453,7 +453,17 @@ body:not(.dark) #theme-button .fa-sun {
     gap: 8px;
 }
 
+#add-dialog {
+    gap: 8px;
+}
+
 #connect-dialog > small {
+    font-family: var(--ff);
+    font-size: 9px;
+    margin-bottom: 7px;
+}
+
+#add-dialog > small {
     font-family: var(--ff);
     font-size: 9px;
     margin-bottom: 7px;
