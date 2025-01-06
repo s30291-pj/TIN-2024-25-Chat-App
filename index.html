@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>TIN - Chat App</title>
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" />
+        <script src="https://kit.fontawesome.com/a0987c2a30.js" crossorigin="anonymous"></script>
+    
+    </head>
+
+    <body class="">
+        <div id="content">
+            <div id="sidebar">
+                <div id="account">
+                    <img id="account-img" class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
+                    <h4 id="account-name" class="name">Didy</h4>
+                    <h6 id="account-identifier" class="identifier">0x285122439a...29413&nbsp;<i class="fa-solid fa-copy"></i></h6>
+                    <button id="logout" class="button-secondary"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                </div>
+                <div id="contacts">
+                    <h2>Chats</h2>
+                    <div id="serach">
+                        <input id="search-contact-input" type="text">
+                        <button id="add-contact-button"></button>
+                    </div>
+                </div>
+                <ul>
+                    <li class="contact" id="user-xsd92j29asdh91">
+                        <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
+                        <h4 class="name">Didy</h4>
+                        <h6 class="identifier">0x2851239a892487e...29413</h6>
+                    </li>
+                </ul>
+            </div>
+            <div id="chat">
+                <div id="receiver">
+                    <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
+                    <h4 class="name">Didy</h4>
+                    <h6 class="identifier">0x2851239a892487e898fd9...29413</h6>
+                </div>
+                <ul id="messages">
+
+                </ul>
+                <div id="message-input-box">
+                    <input id="message-input" type="text" placeholder="Type message here...">
+                    <button id="message-send-button"></button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

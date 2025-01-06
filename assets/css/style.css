@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Syne:wght@400..800&display=swap');
+
+:root {
+    --ff: "Syne", sans-serif;
+    --ff2: "Fira Code", monospace;
+    --h1: 800 2rem/1.2em var(--ff);
+    --p: 400 1rem/1.5em var(--ff);
+    --p-code: 300 .7rem/2em var(--ff2);
+    --hue: 234;
+
+    --tertiary-hue: calc(var(--hue) + 300);
+    --accent-hue: calc(var(--hue) + 60);
+    --primary-color: hsl(var(--hue), 50%, 90%);
+    --pre-primary-color: hsl(var(--hue), 50%, 95%);
+    --secondary-color: hsl(var(--hue), 50%, 10%);
+    --tertiary-color: hsl(var(--tertiary-hue), 80%, 20%);
+    --accent-color: hsl(var(--accent-hue), 80%, 20%);
+}
+
+.dark {
+    --primary-color: hsl(var(--hue), 50%, 10%);
+    --pre-primary-color: hsl(var(--hue), 50%, 15%);
+    --secondary-color: hsl(var(--hue), 50%, 90%);
+    --tertiary-color: hsl(var(--tertiary-hue), 80%, 80%);
+    --accent-color: hsl(var(--accent-hue), 80%, 80%);
+}
+
+body {
+    background: var(--primary-color);
+    margin: 1em;
+    font-family: var(--ff);
+    color: var(--secondary-color);
+}
+
+.button-primary {
+    background-color: var(--accent-color);
+    padding: 0.5em 0.8em 0.5em 0.8em;
+    border-radius: 0.5em;
+    border: none;
+    color: var(--primary-color)
+}
+
+.button-secondary {
+    background-color: transparent;
+    padding: 0.5em 0.8em 0.5em 0.8em;
+    border-radius: 0.5em;
+    border: none;
+    color: var(--accent-color);
+    cursor: pointer;
+}
+
+.button-secondary:hover {
+    background-color: var(--primary-color);
+}
+
+#content {
+    width: 100%;
+    height: 100%;
+    gap: 1em;
+    display: flex;
+    flex-direction: row;
+}
+
+#sidebar {
+    min-width: 14em;
+    min-height: 100px;
+    background-color: var(--pre-primary-color);
+    border-radius: 10px; 
+    padding: 15px;
+}
+
+#account {
+    height: 50px;
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    column-gap: 0.5em;
+}
+
+#account > .avatar-img {
+    height: 40px;
+    width: 40px;
+    margin: 10px 0 10px 0px;
+}
+
+#account > .name {
+    margin: 0;
+}
+
+#account > .identifier {
+    margin: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.1em;
+}
+
+#account > .identifier:hover {
+    background-color: var(--primary-color);
+}
+
+#account > .identifier > i {
+    margin-top: 0.1em;
+}
+
+#account > button {
+    padding: 0.8em 0.1em 0.8em 0.1em;
+}
+
+#account > #logout {
+    margin: 10px 0 10px 0;
+}
+
+.avatar-img {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+}
+
+#chat {
+    width: 100%;
+    height: 100%;
+    background-color: var(--pre-primary-color);
+    border-radius: 10px;
+}
