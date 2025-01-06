@@ -158,7 +158,7 @@
         <div class="dialog-background">
             
         </div>
-        
+
         <div id="connect-dialog" class="dialog">
             <h4>Connect</h4>
             <div id="connect-form">
@@ -166,13 +166,21 @@
                 <input type="text" placeholder="Passphrase">
                 <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
             </div>
+            
+            <small><b>Hey!</b> Create a strong passphrase and store it safely. Everyone can has access to your chats knowing your username and passphrase.</small>
 
             <div id="join-container">
                 <button id="join-button" class="button-primary">Join</button>
                 <h5 id="identifier-lable">Your identifier:</h6>
                 <h6 id="account-identifier" class="identifier">1e8e92d376ecdsadasdssdbcf7c...f3aee<i class="fa-solid fa-copy"></i></h6>
-                <small></small>
             </div>
+        </div>
+
+        <div id="add-dialog" class="dialog">
+            <h4>Add Contact</h4>
+            <input type="text" placeholder="User Hash">
+        
+            <button id="add-button" class="button-primary">Add</button>
         </div>
 
         <button id="theme-button" onclick="changeTheme()">

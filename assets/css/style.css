@@ -449,6 +449,15 @@ body:not(.dark) #theme-button .fa-sun {
     border-radius: 10px;
 }
 
+#connect-dialog {
+    gap: 8px;
+}
+
+#connect-dialog > small {
+    font-family: var(--ff);
+    font-size: 9px;
+    margin-bottom: 7px;
+}
 
 #join-container {
     font-size: 13px;
@@ -467,4 +476,8 @@ body:not(.dark) #theme-button .fa-sun {
 
 #identifier-lable {
     margin: 0 0 0 4px;
+}
+
+#add-button {
+    width: 100px;
 }
