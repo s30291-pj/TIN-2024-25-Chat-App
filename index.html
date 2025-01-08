@@ -13,7 +13,10 @@
                 <div id="account">
                     <img id="account-img" class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
                     <h4 id="account-name" class="name">Didy</h4>
-                    <h6 id="account-identifier" class="identifier">0x285122439a...29413<i class="fa-solid fa-copy"></i></h6>
+                    <div id="account-identifier-copy" class="identifier-container">
+                        <h6 id="account-identifier" class="identifier">0x285122439a...29413</h6>
+                        <i class="fa-solid fa-copy"></i>
+                    </div>
                     <button id="logout" class="button-secondary"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
                 </div>
                 <div id="contacts">
@@ -26,72 +29,18 @@
                         </div>
                     </div>
                     <div id="contact-list">
-                        <div class="contact" id="user-xsd92j29asdh91">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <h4 class="name">Didy</h4>
-                            <h6 class="identifier">0x2851239a892487e...29413</h6>
-                        </div>
-                        <div class="contact selected" id="user-xsd92j29asdh91">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <h4 class="name">Didy</h4>
-                            <h6 class="identifier">0x2851239a892487e...29413</h6>
-                        </div>
-
-                        <div class="contact" id="user-xsd92j29asdh91">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <h4 class="name">Didy</h4>
-                            <h6 class="identifier">0x2851239a892487e...29413</h6>
-                        </div>
-                        <div class="contact" id="user-xsd92j29asdh91">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <h4 class="name">Didy</h4>
-                            <h6 class="identifier">0x2851239a892487e...29413</h6>
-                        </div>
-                        <div class="contact" id="user-xsd92j29asdh91">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <h4 class="name">Didy</h4>
-                            <h6 class="identifier">0x2851239a892487e...29413</h6>
-                        </div>
-                        <div class="contact" id="user-xsd92j29asdh91">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <h4 class="name">Didy</h4>
-                            <h6 class="identifier">0x2851239a892487e...29413</h6>
-                        </div>
-                        <div class="contact" id="user-xsd92j29asdh91">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <h4 class="name">Didy</h4>
-                            <h6 class="identifier">0x2851239a892487e...29413</h6>
-                        </div>
-                        <div class="contact" id="user-xsd92j29asdh91">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <h4 class="name">Didy</h4>
-                            <h6 class="identifier">0x2851239a892487e...29413</h6>
-                        </div>
-                        <div class="contact" id="user-xsd92j29asdh91">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <h4 class="name">Didy</h4>
-                            <h6 class="identifier">0x2851239a892487e...29413</h6>
-                        </div>
-                        <div class="contact" id="user-xsd92j29asdh91">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <h4 class="name">Didy</h4>
-                            <h6 class="identifier">0x2851239a892487e...29413</h6>
-                        </div>
-                        <div class="contact" id="user-xsd92j29asdh91">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <h4 class="name">Didy</h4>
-                            <h6 class="identifier">0x2851239a892487e...29413</h6>
-                        </div>
-
                     </div>
                 </div>
             </div>
 
             <div id="chat-window">
                 <div id="receiver">
-                    <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                    <h4 class="name">Didy</h4>
-                    <h6 id="account-identifier" class="identifier">1e8e92d376ecbcf7c...f3aee<i class="fa-solid fa-copy"></i></h6>
+                    <img id="receiver-img" class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
+                    <h4 id="receiver-name" class="name">Didy</h4>
+                    <div id="receiver-identifier-copy" class="identifier-container">
+                        <h6 id="account-identifier" class="identifier">0x285122439a...29413</h6>
+                        <i class="fa-solid fa-copy"></i>
+                    </div>
                 </div>
                 <div id="chat">
                     <div id="messages">
@@ -155,7 +104,7 @@
         </div>
 
         
-        <div class="dialog-background">
+        <!-- <div class="dialog-background">
             
         </div>
 
@@ -182,9 +131,9 @@
             <small>Provide the <b>other user's</b> hash above. To establish contact, the other user also needs to invite you using <b>your</b> hash."</small>
 
             <button id="add-button" class="button-primary">Invite</button>
-        </div>
+        </div> -->
 
-        <button id="theme-button" onclick="changeTheme()">
+        <button id="theme-button" onclick="switchTheme()">
             <i class="fa-solid fa-moon"></i>
             <i class="fa-solid fa-sun"></i>
         </button>
