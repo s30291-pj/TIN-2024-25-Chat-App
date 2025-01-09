@@ -11,10 +11,10 @@
         <div id="content">
             <div id="sidebar">
                 <div id="account">
-                    <img id="account-img" class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                    <h4 id="account-name" class="name">Didy</h4>
+                    <img id="account-img" class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Unknown&size=32">
+                    <h4 id="account-name" class="name">Unknown</h4>
                     <div id="account-identifier-copy" class="identifier-container">
-                        <h6 id="account-identifier" class="identifier">0x285122439a...29413</h6>
+                        <h6 id="account-identifier" class="identifier">Unknown</h6>
                         <i class="fa-solid fa-copy"></i>
                     </div>
                     <button id="logout" class="button-secondary"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
@@ -33,67 +33,17 @@
                 </div>
             </div>
 
-            <div id="chat-window">
-                <div id="receiver">
-                    <img id="receiver-img" class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                    <h4 id="receiver-name" class="name">Didy</h4>
-                    <div id="receiver-identifier-copy" class="identifier-container">
-                        <h6 id="account-identifier" class="identifier">0x285122439a...29413</h6>
+            <div id="chat-window" class="">
+                <div id="chat-receiver">
+                    <img id="chat-receiver-img" class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
+                    <h4 id="chat-receiver-name" class="name">Unknown</h4>
+                    <div id="chat-receiver-identifier-copy" class="identifier-container">
+                        <h6 id="chat-receiver-identifier" class="identifier">Unknown</h6>
                         <i class="fa-solid fa-copy"></i>
                     </div>
                 </div>
                 <div id="chat">
                     <div id="messages">
-                        <div id="message-242421" class="message">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <p>This is a message here...</p>
-                            <small>12:07</small>
-                        </div>
-                        <div id="message-242421" class="message">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <p>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-                            <small>12:07</small>
-                        </div>
-                        <div id="message-242421" class="message">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <p>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                                a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-                                of Lorem Ipsum</p>
-                            <small>12:07</small>
-                        </div>
-                        <div id="message-242421" class="message">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <p>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                                a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-                                of Lorem Ipsum</p>
-                            <small>12:07</small>
-                        </div>
-                        <div id="message-242421" class="message">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <p>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                                a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-                                of Lorem Ipsum</p>
-                            <small>12:07</small>
-                        </div>
-                        <div id="message-242421" class="message sender">
-                            <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-                            <p>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                                a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-                                of Lorem Ipsum</p>
-                            <small>12:07</small>
-                        </div>
                     </div>
                 </div>
                 <div id="message-input-box">
@@ -103,35 +53,38 @@
             </div>
         </div>
 
-        
-        <!-- <div class="dialog-background">
-            
+        <div id="dialogs-wrapper" class="">
+            <span class="dialog-background"></span>
+    
+            <div id="connect-dialog" class="dialog active">
+                <h4>Connect</h4>
+                <div id="connect-form">
+                    <input type="text" placeholder="Username">
+                    <input type="text" placeholder="Passphrase">
+                    <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
+                </div>
+                
+                <small><b>Hey!</b> Create a strong passphrase and store it safely. Anyone who knows your username and passphrase can access your chats.</small>
+    
+                <div id="join-container">
+                    <button id="join-button" class="button-primary">Join</button>
+                    <h5 id="identifier-lable">Your identifier:</h6>
+                    <div id="account-identifier-copy" class="identifier-container">
+                        <h6 id="account-identifier" class="identifier">Unknown for now!</h6>
+                        <i class="fa-solid fa-copy"></i>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="add-dialog" class="dialog">
+                <h4>Add Contact</h4>
+                <input type="text" placeholder="User Hash">
+                <small>Provide the <b>other user's</b> hash above. To establish contact, the other user also needs to invite you using <b>your</b> hash."</small>
+    
+                <button id="add-button" class="button-primary">Invite</button>
+            </div>
         </div>
 
-        <div id="connect-dialog" class="dialog">
-            <h4>Connect</h4>
-            <div id="connect-form">
-                <input type="text" placeholder="Username">
-                <input type="text" placeholder="Passphrase">
-                <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
-            </div>
-            
-            <small><b>Hey!</b> Create a strong passphrase and store it safely. Anyone who knows your username and passphrase can access your chats.</small>
-
-            <div id="join-container">
-                <button id="join-button" class="button-primary">Join</button>
-                <h5 id="identifier-lable">Your identifier:</h6>
-                <h6 id="account-identifier" class="identifier">1e8e92d376ecdsadasdssdbcf7c...f3aee<i class="fa-solid fa-copy"></i></h6>
-            </div>
-        </div>
-
-        <div id="add-dialog" class="dialog">
-            <h4>Add Contact</h4>
-            <input type="text" placeholder="User Hash">
-            <small>Provide the <b>other user's</b> hash above. To establish contact, the other user also needs to invite you using <b>your</b> hash."</small>
-
-            <button id="add-button" class="button-primary">Invite</button>
-        </div> -->
 
         <button id="theme-button" onclick="switchTheme()">
             <i class="fa-solid fa-moon"></i>
