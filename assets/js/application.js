@@ -12,8 +12,6 @@ function connect() {
     let passphrase = passphraseElement.value;
     let server = serverElement.value;
 
-    console.log(username, passphrase);
-
     if (!isCredentialsValid(username, passphrase)) {
         errorElement.innerHTML = "<b>Error!</b> You have to provide a correct username and passphrase(more than 6 characters each)";
         errorElement.classList.add("active");
@@ -55,6 +53,9 @@ function logout() {
     application = null;
 
     showConnectDialog();
+
+    document.getElementById("chat-window").classList.remove("active");
+    document.getElementById("messages").replaceChildren();
 }
 
 function showConnectDialog() {

@@ -95,13 +95,29 @@ class App {
             this.contactsContainer.add(new Contact(request.username, request.identifier));
         }
         else if(request instanceof ChatMessageReceivedRequest) {
-            console.log("k",this.chatContainer.identifier === request.chat);
-            console.log("cc", this.chatContainer.identifier, request.chat);
-
-            
-            if(await this.chatContainer.getChatIdentifier() === request.chat) {
+            if (this.chatContainer.isOpen && await this.chatContainer.getChatIdentifier() === request.chat) {
                 let msg = new Message(request.sender, request.content, request.timestamp);
                 this.chatContainer.receive(msg);
+            }
+            else {
+                this.contactsContainer.contacts.forEach((c) => {
+                    if(c.identifier === request.sender) {
+                        if (c.unread == null) {
+                            c.unread = 0;
+                        }
+                        
+                        c.unread += 1;
+
+                        let contactElement = document.getElementById(`contact-${c.identifier}`);
+                        
+                        console.log(contactElement);
+
+                        let unreadElement = contactElement.children.item(3);
+                        
+                        unreadElement.classList.add("active");
+                        unreadElement.innerHTML = c.unread;
+                    }
+                })
             }
         }
     }
@@ -196,7 +212,10 @@ class ContactsContainer {
 
     async fetch(credentials) {
         if(credentials instanceof Credentials) {
-            this.contacts = []; //await (await fetch(`${this.app.address}contacts`)).json();
+            this.contacts = await (await fetch(`${this.app.address}contacts`, {
+                method: "POST",
+                body: JSON.stringify({username: credentials.username, passphrase: credentials.passphrase})
+            })).json();
         }
     }
 
@@ -205,9 +224,6 @@ class ContactsContainer {
         let filtered = this.contacts.filter((c) => (filter != null) ? c.contains(filter.toLowerCase()) : true);
         
         container.replaceChildren();
-
-        console.log(filter);
-        console.log(filtered);
 
         filtered.forEach((c) => {
             let element = this.contactElementFactory(c.username, c.identifier);
@@ -261,11 +277,14 @@ class ContactsContainer {
         let contactIdentifier = document.createElement("h6");
         contactIdentifier.classList.add("identifier");
         contactIdentifier.innerText = "#" + identifier;
+        
+        let contactUnreadMessages = document.createElement("h4");
+        contactUnreadMessages.classList.add("unread-messages");
 
         let contactContainer = document.createElement("div");
         contactContainer.classList.add("contact");
         contactContainer.id = `contact-${identifier}`;
-        contactContainer.append(contactImg, contactName, contactIdentifier);
+        contactContainer.append(contactImg, contactName, contactIdentifier, contactUnreadMessages);
 
         return contactContainer;
     }
@@ -308,6 +327,13 @@ class ChatContainer {
             }
         })
     }
+    
+    async fetch(credentials, receiverId) {
+        this.history = await (await fetch(`${this.app.address}chat`, {
+            method: "POST",
+            body: JSON.stringify({ username: credentials.username, passphrase: credentials.passphrase, receiver: receiverId })
+        })).json();
+    }
 
     async open(contact) {
         if (this.receiver != null && this.receiver.identifier === contact.identifier) return;
@@ -324,16 +350,17 @@ class ChatContainer {
         let chatWindow = document.getElementById("chat-window");
         chatWindow.classList.add("active");
 
+        let contactElement = document.getElementById(`contact-${contact.identifier}`);
+        let unreadElement = contactElement.children.item(3);
+
+        contact.unread = 0;
+
+        unreadElement.classList.remove("active");
+
         this.updateReceiverDetails();
 
-        await this.fetch();
+        await this.fetch(this.app.credentials, this.receiver.identifier);
         this.showMessages();
-    }
-
-    async fetch() {
-        this.history = [
-            new Message(this.receiver.identifier, "This is a message!", new Date().getTime())
-        ];
     }
 
     updateReceiverDetails() {
@@ -352,9 +379,13 @@ class ChatContainer {
 
         chatContainer.replaceChildren();
 
+        var lastMsg;
+
         this.history.forEach(msg => {
-            this.showMessage(msg, chatContainer);
+            lastMsg = this.showMessage(msg, chatContainer);
         });
+
+        if (lastMsg != null) lastMsg.scrollIntoView();
     }
 
     addMessage(message) {
@@ -372,6 +403,7 @@ class ChatContainer {
         container.append(msgElement);
 
         msgElement.scrollIntoView({behavior: "smooth"});
+        return msgElement;
     }
 
     async getChatIdentifier() {
@@ -379,35 +411,33 @@ class ChatContainer {
     }
 
     messageElementFactory(message) {
-        if(message instanceof Message) {
-            let messageAvatar = document.createElement("img");
-            messageAvatar.classList.add("avatar-img");
-            messageAvatar.src = getAvatarImage(message.sender);
+        let messageAvatar = document.createElement("img");
+        messageAvatar.classList.add("avatar-img");
+        messageAvatar.src = getAvatarImage(message.sender);
 
-            let messageContent = document.createElement("p");
-            messageContent.innerHTML = message.content;
+        let messageContent = document.createElement("p");
+        messageContent.innerHTML = message.content;
 
-            let messageTimestamp = document.createElement("small");
-            
-            let date = new Date(message.timestamp);
+        let messageTimestamp = document.createElement("small");
+        
+        let date = new Date(message.timestamp);
 
-            const minutes = String(date.getMinutes()).padStart(2, '0');
-            const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
 
-            messageTimestamp.innerHTML = `${hours}:${minutes}`;
+        messageTimestamp.innerHTML = `${hours}:${minutes}`;
 
-            let messageContainer = document.createElement("div");
-            messageContainer.classList.add("message");
-            messageContainer.append(messageAvatar);
-            messageContainer.append(messageContent);
-            messageContainer.append(messageTimestamp);
+        let messageContainer = document.createElement("div");
+        messageContainer.classList.add("message");
+        messageContainer.append(messageAvatar);
+        messageContainer.append(messageContent);
+        messageContainer.append(messageTimestamp);
 
-            if(!(message.sender === this.receiver.identifier)) {
-                messageContainer.classList.add("sender");
-            }
-
-           return messageContainer;
+        if(!(message.sender === this.receiver.identifier)) {
+            messageContainer.classList.add("sender");
         }
+
+        return messageContainer;
     }
 
     receive(message) {
