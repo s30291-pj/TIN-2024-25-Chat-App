@@ -46,10 +46,6 @@ class Contact {
         this.identifier = identifier;
     }
 
-    contains(search) {
-        return this.username.toLowerCase().includes(search) ||  
-            (search.length >= 64 && ("#" + this.identifier).toLowerCase().includes(search));
-    }
 }
 
 class Message {
@@ -221,7 +217,15 @@ class ContactsContainer {
 
     display(filter) {
         let container = document.getElementById("contact-list");
-        let filtered = this.contacts.filter((c) => (filter != null) ? c.contains(filter.toLowerCase()) : true);
+
+        if (filter != null) filter = String(filter).toLowerCase();
+
+        let filtered = this.contacts.filter((c) => {
+            return (filter != null)
+                ? String(c.username).toLowerCase().includes(filter) ||
+                (filter.length >= 64 && String(("#" + c.identifier)).toLowerCase().includes(filter))
+                : true;
+        });
         
         container.replaceChildren();
 

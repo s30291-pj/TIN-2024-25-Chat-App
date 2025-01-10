@@ -30,7 +30,9 @@
                             <button id="add-contact-button" class="button-secondary"><i class="fa-solid fa-user-plus"></i></button>
                         </div>
                     </div>
-                    <div id="contact-list"></div>
+                    <div id="contact-list">
+                        <small>No contact found!</small>
+                    </div>
                 </div>
             </div>
 
@@ -64,7 +66,7 @@
                     <input id="connect-passphrase" type="password" placeholder="Passphrase" autocomplete="off" oninput="onConnectDialogInput()">
                     <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
                 </div>
-                <input id="connect-server" type="text" placeholder="Server" value="http://sv1-tin-chat.hinsinger.me/api/" autocomplete="off">
+                <input id="connect-server" type="text" placeholder="Server" value="https://sv1-tin-chat.hinsinger.me/api/" autocomplete="off">
                 <small id="connect-error" class="error-text"></small>
                 
                 <small><b>Hey!</b> Create a strong passphrase and store it safely. Anyone who knows your username and passphrase can access your chats.</small>
