@@ -127,6 +127,9 @@ input {
     padding-left: 5px;
     max-width: 120px;
     overflow: hidden;
+    max-height: 30px;
+    word-break: keep-all;
+    white-space: nowrap;
     text-overflow: ellipsis;
     align-self: start;
 }
@@ -210,6 +213,10 @@ input {
     font-size: 10px;
 }
 
+
+input:is(:-webkit-autofill, :autofill) {
+    background-color: var(--primary-color) !important;
+}
 
 input:focus {
     outline: none;
@@ -480,7 +487,15 @@ body:not(.dark) #theme-button .fa-sun {
     gap: 8px;
 }
 
-#add-dialog {
+.error-text:not(.active) {
+    display: none;
+}
+
+.error-text {
+    color: red;
+}
+
+#invite-dialog {
     gap: 8px;
 }
 
@@ -490,7 +505,7 @@ body:not(.dark) #theme-button .fa-sun {
     margin-bottom: 7px;
 }
 
-#add-dialog > small {
+#invite-dialog > small {
     font-family: var(--ff);
     font-size: 9px;
     margin-bottom: 7px;
@@ -515,7 +530,7 @@ body:not(.dark) #theme-button .fa-sun {
     margin: 0 0 0 4px;
 }
 
-#add-button {
+#invite-button {
     width: 100px;
 }
 
@@ -525,4 +540,12 @@ body:not(.dark) #theme-button .fa-sun {
 
 .dialog:not(.active) {
     display: none;
+}
+
+#close-dialog {
+    width: 100px;
+}
+
+.button-rows {
+    display: flex;
 }

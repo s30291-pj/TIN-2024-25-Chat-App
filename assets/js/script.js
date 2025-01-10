@@ -68,12 +68,15 @@ class App {
     accountContainer = new AccountContainer(this);
     contactsContainer = new ContactsContainer(this);
     chatContainer = new ChatContainer(this);
+    socketHandler = new ChatSocketHandler();
 
-    credentials;
-
-    async init(credentials) {
+    async init(credentials, address) {
         if(credentials instanceof Credentials) {
             this.credentials = credentials;
+            this.address = address;
+
+            this.socketHandler.connect(address, credentials);
+            this.socketHandler.onrequest = (req) => this.handle(req);
 
             let username = credentials.username;
             let hash = await credentials.getHash();
@@ -86,13 +89,29 @@ class App {
             this.contactsContainer.display();
         }
     }
+
+    async handle(request) {
+        if(request instanceof ChatContactEstablishedRequest) {
+            this.contactsContainer.add(new Contact(request.username, request.identifier));
+        }
+        else if(request instanceof ChatMessageReceivedRequest) {
+            console.log("k",this.chatContainer.identifier === request.chat);
+            console.log("cc", this.chatContainer.identifier, request.chat);
+
+            
+            if(await this.chatContainer.getChatIdentifier() === request.chat) {
+                let msg = new Message(request.sender, request.content, request.timestamp);
+                this.chatContainer.receive(msg);
+            }
+        }
+    }
+
+    logout() {
+        this.socketHandler.close();
+    }
 }
 
 class AccountContainer {
-    username;
-    identifier;
-    app;
-
     constructor(app) {
         this.app = app;
     }
@@ -132,7 +151,6 @@ class AccountContainer {
 
 class ContactsContainer {
     contacts = [];
-    app;
 
     constructor(app) {
         this.app = app;
@@ -141,14 +159,44 @@ class ContactsContainer {
     initEvents() {
         let searchInput = document.getElementById("search-contact-input");
         searchInput.addEventListener("input", (event) => {
-            console.log("test");
             this.display(event.target.value);
+        })
+
+        let addContactButton = document.getElementById("add-contact-button");
+        addContactButton.addEventListener("click", (event) => {
+            let inputElement = document.getElementById("invitation-input");
+            let errorElement = document.getElementById("invitation-error");
+
+            inputElement.value = "";
+            errorElement.value = "";
+
+            errorElement.classList.remove("active");
+
+            showInviteDialog();
+        });
+
+        let inviteButton = document.getElementById("invite-button");
+        inviteButton.addEventListener("click", (event) => {
+            let inputElement = document.getElementById("invitation-input");
+            let errorElement = document.getElementById("invitation-error");
+
+            let receiver = inputElement.value.trim().replaceAll("#", "");
+
+            if (receiver.length != 64) {
+                errorElement.innerHTML = "<b>Error!</b> You have provided a wrong identifier!";
+                errorElement.classList.add("active");
+                return;
+            }
+            
+            this.invite(receiver);
+
+            closeDialog();
         })
     }
 
     async fetch(credentials) {
         if(credentials instanceof Credentials) {
-            this.contacts = [new Contact("test", await hash("test2")), new Contact("Andrzej", await hash("andrzej")), new Contact("Filip", await hash("filip"))];
+            this.contacts = []; //await (await fetch(`${this.app.address}contacts`)).json();
         }
     }
 
@@ -189,6 +237,18 @@ class ContactsContainer {
         }
     }
 
+    add(contact) {
+        if(contact instanceof Contact) {
+            this.contacts.push(contact);
+            this.display();
+        }
+    }
+
+    invite(identifier) {
+        let request = new ChatContactInviteRequest(identifier);
+        this.app.socketHandler.send(request);
+    }
+
     contactElementFactory = function(username, identifier) {
         let contactImg = document.createElement("img");
         contactImg.classList.add("avatar-img");
@@ -213,9 +273,7 @@ class ContactsContainer {
 }
 
 class ChatContainer {
-    receiver;
     history = [];
-    app;
 
     isOpen = false;
 
@@ -316,6 +374,10 @@ class ChatContainer {
         msgElement.scrollIntoView({behavior: "smooth"});
     }
 
+    async getChatIdentifier() {
+        return getChatIdentifier(this.receiver.identifier, await this.app.credentials.getHash());
+    }
+
     messageElementFactory(message) {
         if(message instanceof Message) {
             let messageAvatar = document.createElement("img");
@@ -356,15 +418,19 @@ class ChatContainer {
 
     async send(text) {
         let message = new Message(await this.app.credentials.getHash(), text, new Date().getTime());
+        
+        let request = new ChatMessageSentRequest(this.receiver.identifier, message.sender, message.content, message.timestamp);
+
+        this.app.socketHandler.send(request);
+        
         this.addMessage(message);
     }
 }
 
-var app
-
-window.onload = function() { 
-    app = new App();
-    app.init(new Credentials("Test", "test"));
+function getChatIdentifier(identifier1, identifier2) {
+    let sorted = [identifier1, identifier2].sort();
+    
+    return sorted[0] + sorted[1];
 }
 
 async function hash(string) {

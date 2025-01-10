@@ -5,6 +5,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" />
         <script src="https://kit.fontawesome.com/a0987c2a30.js" crossorigin="anonymous"></script>
         <script src="./assets/js/script.js"></script>
+        <script src="./assets/js/communication.js"></script>
+        <script src="./assets/js/application.js"></script>
     </head>
 
     <body id="site" class="">
@@ -17,14 +19,14 @@
                         <h6 id="account-identifier" class="identifier">Unknown</h6>
                         <i class="fa-solid fa-copy"></i>
                     </div>
-                    <button id="logout" class="button-secondary"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                    <button id="logout" class="button-secondary" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
                 </div>
                 <div id="contacts">
                     <div id="contact-list-header">
                         <h2>Chats</h2>
                         <div id="search">
                             <i class="fa-solid fa-search"></i>
-                            <input id="search-contact-input" type="text" placeholder="Search in contacts">
+                            <input id="search-contact-input" type="text" placeholder="Search in contacts" autocomplete="off">
                             <button id="add-contact-button" class="button-secondary"><i class="fa-solid fa-user-plus"></i></button>
                         </div>
                     </div>
@@ -53,35 +55,40 @@
             </div>
         </div>
 
-        <div id="dialogs-wrapper" class="">
+        <div id="dialogs-wrapper" class="active">
             <span class="dialog-background"></span>
     
             <div id="connect-dialog" class="dialog active">
                 <h4>Connect</h4>
                 <div id="connect-form">
-                    <input type="text" placeholder="Username">
-                    <input type="text" placeholder="Passphrase">
+                    <input id="connect-username" type="text" placeholder="Username" autocomplete="off" oninput="onConnectDialogInput()">
+                    <input id="connect-passphrase" type="password" placeholder="Passphrase" autocomplete="off" oninput="onConnectDialogInput()">
                     <img class="avatar-img" src="https://api.dicebear.com/9.x/identicon/svg?seed=Test&size=32">
                 </div>
+                <input id="connect-server" type="text" placeholder="Server" value="http://localhost:5432/api/" autocomplete="off">
+                <small id="connect-error" class="error-text"></small>
                 
                 <small><b>Hey!</b> Create a strong passphrase and store it safely. Anyone who knows your username and passphrase can access your chats.</small>
     
                 <div id="join-container">
-                    <button id="join-button" class="button-primary">Join</button>
+                    <button id="join-button" class="button-primary" onclick="connect()">Join</button>
                     <h5 id="identifier-lable">Your identifier:</h6>
-                    <div id="account-identifier-copy" class="identifier-container">
-                        <h6 id="account-identifier" class="identifier">Unknown for now!</h6>
+                    <div id="connect-identifier-copy" class="identifier-container">
+                        <h6 id="connect-identifier" class="identifier">Unknown for now!</h6>
                         <i class="fa-solid fa-copy"></i>
                     </div>
                 </div>
             </div>
     
-            <div id="add-dialog" class="dialog">
+            <div id="invite-dialog" class="dialog">
                 <h4>Add Contact</h4>
-                <input type="text" placeholder="User Hash">
-                <small>Provide the <b>other user's</b> hash above. To establish contact, the other user also needs to invite you using <b>your</b> hash."</small>
-    
-                <button id="add-button" class="button-primary">Invite</button>
+                <input id="invitation-input" type="text" placeholder="User Hash">
+                <small id="invitation-error" class="error-text"></small>
+                <small>Provide the <b>other user's</b> hash above. To establish contact, the other user also needs to invite you using <b>your</b> hash.</small>
+                <div class="buttons-row">
+                    <button id="invite-button" class="button-primary">Invite</button>
+                    <button id="close-dialog" class="button-secondary" onclick="closeDialog()">Cancel</button>
+                </div>
             </div>
         </div>
 
