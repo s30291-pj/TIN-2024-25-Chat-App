@@ -436,7 +436,7 @@ input:focus {
     z-index: 10;
     padding: 5px;
     left: 50%;
-    width: 24em;
+    width: 28em;
     transform: translateX(-50%);
 }
 
