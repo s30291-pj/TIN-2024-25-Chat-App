@@ -66,7 +66,7 @@ class ChatSocketHandler {
     shouldReconnect = true;
 
     connect(address, credentials) {
-        if (this.socket != null) socket.close();
+        if (this.socket != null && this.socket.readyState == this.socket.OPEN) this.socket.close();
 
         this.credentials = credentials;
         this.session = null;
