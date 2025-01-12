@@ -123,7 +123,7 @@ class ChatSocketHandler {
     }
 
     close() {
-        shouldReconnect = false;
+        this.shouldReconnect = false;
         this.socket.close();
     }
 }
