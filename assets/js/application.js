@@ -30,13 +30,16 @@ async function onConnectDialogInput() {
     let username = document.getElementById("connect-username").value;
     let passphrase = document.getElementById("connect-passphrase").value;
 
-    let element = document.getElementById("connect-identifier");
+    let identifier = document.getElementById("connect-identifier");
+    let avatar = document.getElementById("connect-avatar");
 
     if (isCredentialsValid(username, passphrase)) {
-        element.innerHTML = await hash(username + passphrase);
+        let hashVal = await hash(username + passphrase);
+        identifier.innerHTML = hashVal;
+        avatar.src = getAvatarImage(hashVal);
     }
     else {
-        element.innerHTML = "Unknown for now!"
+        identifier.innerHTML = "Unknown for now!"
     }
 }
 

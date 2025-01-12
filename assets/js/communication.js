@@ -63,8 +63,10 @@ class ChatContactEstablishedRequest extends ChatRequest {
 class ChatSocketHandler {
     onrequest = function(request) {};
 
+    shouldReconnect = true;
+
     connect(address, credentials) {
-        if (this.socket != null) socket.close();
+        if (this.socket != null && this.socket.readyState == this.socket.OPEN) this.socket.close();
 
         this.credentials = credentials;
         this.session = null;
@@ -77,6 +79,11 @@ class ChatSocketHandler {
 
         this.socket.addEventListener("message", (event) => {
             this.connectionMessage(event.data);
+        });
+
+        this.socket.addEventListener("close", (event) => {
+            console.log("Lost connection with server socket!");
+            this.connect(address, credentials);
         });
     }
 
@@ -116,6 +123,7 @@ class ChatSocketHandler {
     }
 
     close() {
+        shouldReconnect = false;
         this.socket.close();
     }
 }
