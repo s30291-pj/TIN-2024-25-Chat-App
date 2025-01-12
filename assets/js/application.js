@@ -35,7 +35,7 @@ async function onConnectDialogInput() {
 
     if (isCredentialsValid(username, passphrase)) {
         let hashVal = await hash(username + passphrase);
-        identifier.innerHTML = hashVal;
+        identifier.innerHTML = "#" + hashVal;
         avatar.src = getAvatarImage(hashVal);
     }
     else {
